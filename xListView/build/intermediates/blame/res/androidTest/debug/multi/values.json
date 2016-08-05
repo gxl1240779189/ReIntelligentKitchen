@@ -1,0 +1,159 @@
+[
+    {
+        "outputFile": "F:\\MyAndroidDemo\\Intelligentkitchen\\xListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 46,
+                    "endOffset": 97
+                },
+                "from": {
+                    "file": "F:\\MyAndroidDemo\\Intelligentkitchen\\xListView\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 46,
+                        "endOffset": 97
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 102,
+                    "endColumn": 65,
+                    "endOffset": 163
+                },
+                "from": {
+                    "file": "F:\\MyAndroidDemo\\Intelligentkitchen\\xListView\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 102,
+                        "endColumn": 65,
+                        "endOffset": 163
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 168,
+                    "endColumn": 61,
+                    "endOffset": 225
+                },
+                "from": {
+                    "file": "F:\\MyAndroidDemo\\Intelligentkitchen\\xListView\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 168,
+                        "endColumn": 61,
+                        "endOffset": 225
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 230,
+                    "endColumn": 62,
+                    "endOffset": 288
+                },
+                "from": {
+                    "file": "F:\\MyAndroidDemo\\Intelligentkitchen\\xListView\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 230,
+                        "endColumn": 62,
+                        "endOffset": 288
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 293,
+                    "endColumn": 65,
+                    "endOffset": 354
+                },
+                "from": {
+                    "file": "F:\\MyAndroidDemo\\Intelligentkitchen\\xListView\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 293,
+                        "endColumn": 65,
+                        "endOffset": 354
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 359,
+                    "endColumn": 61,
+                    "endOffset": 416
+                },
+                "from": {
+                    "file": "F:\\MyAndroidDemo\\Intelligentkitchen\\xListView\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 359,
+                        "endColumn": 61,
+                        "endOffset": 416
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 421,
+                    "endColumn": 62,
+                    "endOffset": 479
+                },
+                "from": {
+                    "file": "F:\\MyAndroidDemo\\Intelligentkitchen\\xListView\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 421,
+                        "endColumn": 62,
+                        "endOffset": 479
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 484,
+                    "endColumn": 47,
+                    "endOffset": 527
+                },
+                "from": {
+                    "file": "F:\\MyAndroidDemo\\Intelligentkitchen\\xListView\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 484,
+                        "endColumn": 47,
+                        "endOffset": 527
+                    }
+                }
+            }
+        ]
+    }
+]
