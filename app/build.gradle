@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "24.0.0"
+
+    defaultConfig {
+        applicationId "com.gxl.intelligentkitchen"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile files('libs/jsoup-1.7.2.jar')
+    compile files('libs/universal-image-loader-1.8.6-with-sources.jar')
+    compile files('libs/xUtils-2.6.14.jar')
+    compile project(':xListView')
+    //编译RxJava
+    //编译RxAndroid
+    //编译Retrofit及其相关库，包括Gson
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'com.squareup.retrofit2:retrofit:2.0.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'com.squareup.retrofit2:converter-scalars:2.0.0'
+    compile 'com.android.support:support-v4:23.4.0'
+}

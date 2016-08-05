@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:id="@+id/food_newsImg"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher"
+            android:visibility="visible" />
+
+
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/food_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="韭菜炒蛋"
+                        android:textColor="#000000"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/food_taste"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="拌 / 家常味"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/food_date"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="10步 / 大概15分钟"
+                        android:textSize="10dp"
+                        android:textColor="#757171"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/food_personname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="黄豆豆"
+                    android:layout_gravity="center_vertical"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>

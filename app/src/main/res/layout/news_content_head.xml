@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/biz_news_detaila_action_bar_bg"
+    android:orientation="horizontal" >
+    
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/back_btn"/>
+    <ImageView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/base_action_bar_back_divider"/>
+	<TextView
+	    android:id="@+id/title"
+	    android:layout_width="0dp"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="1"
+	    android:layout_gravity="center_vertical"
+	    android:gravity="center"
+	    android:layout_marginLeft="4dp"
+	    android:textColor="@color/black"
+	    android:textStyle="bold"
+	    android:textSize="21sp"
+	    >
+	</TextView>
+	<ImageView
+	    android:id="@+id/favorite"
+		android:layout_width="30dp"
+		android:layout_height="30dp"
+		android:layout_marginRight="10dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/star"/>
+	
+
+</LinearLayout>

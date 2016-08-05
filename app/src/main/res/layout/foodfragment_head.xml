@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/SlideShowView"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp" >
+
+        <com.gxl.intelligentkitchen.ui.customview.SlideShowView
+            android:id="@+id/slideshowView"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true" />
+    </FrameLayout>
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="203dp"
+        android:horizontalSpacing="0.0dip"
+        android:listSelector="@null"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="0.0dip" >
+    </GridView>
+
+</LinearLayout>
