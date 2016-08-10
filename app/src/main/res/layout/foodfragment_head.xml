@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#f4f4f4"
+    >
 
     <FrameLayout
         android:id="@+id/SlideShowView"
@@ -17,15 +19,20 @@
     </FrameLayout>
 
     <GridView
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
         android:id="@+id/gridview"
         android:layout_width="fill_parent"
-        android:layout_height="203dp"
+        android:layout_height="wrap_content"
         android:horizontalSpacing="0.0dip"
         android:listSelector="@null"
-        android:numColumns="3"
+        android:numColumns="4"
         android:scrollbars="none"
         android:stretchMode="columnWidth"
         android:verticalSpacing="0.0dip" >
     </GridView>
+
+    <include layout="@layout/dynamic_listview_item"></include>
+
 
 </LinearLayout>

@@ -33,7 +33,7 @@ import rx.schedulers.Schedulers;
 /**
  * 作者：GXL on 2016/8/3 0003
  * 博客: http://blog.csdn.net/u014316462
- * 作用：
+ * 作用：Food请求model
  */
 public class FoodModel implements FoodModelImpl {
     @Override
@@ -71,6 +71,7 @@ public class FoodModel implements FoodModelImpl {
                  .map(new Func1<String, FoodDetailTeachItem>() {
                      @Override
                      public FoodDetailTeachItem call(String s) {
+                         Log.i("TAG", "call: "+s);
                          return HtmlParser.parserHtmlToDetailInPc(s);
                      }
                  })
@@ -81,6 +82,7 @@ public class FoodModel implements FoodModelImpl {
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.i("TAG", "call:"+e);
                         listener.getFailure();
                     }
 

@@ -23,12 +23,14 @@ public class FoodGeneralAdapter extends BaseAdapter {
 
 	private LayoutInflater mInflater;
 	private List<FoodGeneralItem> mDatas;
+	private int mLayoutRes;
 
 	private ImageLoader imageLoader = ImageLoader.getInstance();
 	private DisplayImageOptions options;
 
-	public FoodGeneralAdapter(Context context, List<FoodGeneralItem> datas) {
+	public FoodGeneralAdapter(Context context, int layoutRes,List<FoodGeneralItem> datas) {
 		this.mDatas = datas;
+		this.mLayoutRes=layoutRes;
 		mInflater = LayoutInflater.from(context);
 		imageLoader.init(ImageLoaderConfiguration.createDefault(context));
 		options = new DisplayImageOptions.Builder()
@@ -73,7 +75,7 @@ public class FoodGeneralAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.general_listview_item, null);
+			convertView = mInflater.inflate(mLayoutRes, null);
 			holder = new ViewHolder();
 			holder.mTaste = (TextView) convertView
 					.findViewById(R.id.food_taste);

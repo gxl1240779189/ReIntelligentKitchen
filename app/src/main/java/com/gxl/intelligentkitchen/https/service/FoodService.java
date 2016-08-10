@@ -9,10 +9,10 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 /**
- * 作者：GXL on 2016/8/3 0003
- * 博客: http://blog.csdn.net/u014316462
- * 作用：该接口用来请求美食杰网页数据
- */
+        * 作者：GXL on 2016/8/3 0003
+        * 博客: http://blog.csdn.net/u014316462
+        * 作用：该接口用来请求美食杰网页数据
+        */
 public interface FoodService {
 
     /**

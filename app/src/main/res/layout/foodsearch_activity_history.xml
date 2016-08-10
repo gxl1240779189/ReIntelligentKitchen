@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout   xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/search_history_ll"  
+        android:orientation="vertical"  
+        android:layout_width="match_parent"  
+        android:layout_height="wrap_content">  
+        <TextView  
+            android:id="@+id/contentTextView"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:textSize="20dp" 
+            android:textColor="#C0BAB2" 
+            android:text="历史搜索"  
+            android:paddingLeft="10dp"  
+           />  
+
+        <ListView
+            android:id="@+id/search_history_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             android:cacheColorHint="#00000000"   
+             android:divider="#cccccc"         
+             android:dividerHeight="1dp"     
+           >
+        </ListView>  
+        <Button  
+            android:id="@+id/clear_history_btn"  
+            android:layout_width="160dp"  
+            android:layout_height="35dp"  
+            android:layout_marginTop="5dp"  
+            android:textColor="#FE6316"  
+            android:layout_gravity="center"  
+            android:textSize="20dp"  
+            android:text="清除搜索历史"
+            android:layout_centerHorizontal="true"  
+            android:background="@drawable/qingchusearchhistory"
+            style="?android:buttonBarButtonStyle"/>  
+</LinearLayout>

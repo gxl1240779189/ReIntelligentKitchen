@@ -1,21 +1,23 @@
 package com.gxl.intelligentkitchen.ui.activity;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
+import android.support.v4.view.ViewPager;
 import android.view.Window;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gxl.intelligentkitchen.R;
+import com.gxl.intelligentkitchen.ui.customview.ViewPaperIndicator;
 import com.gxl.intelligentkitchen.ui.fragment.FoodTypeFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,99 +29,58 @@ import butterknife.OnClick;
  * 作用：
  */
 public class FoodTypeActivity extends FragmentActivity {
-    @Bind(R.id.back)
-    ImageView back;
     @Bind(R.id.title)
     TextView title;
-    @Bind(R.id.newfoodTv)
-    TextView newfoodTv;
-    @Bind(R.id.newfood)
-    RelativeLayout newfood;
-    @Bind(R.id.hotfoodTv)
-    TextView hotfoodTv;
-    @Bind(R.id.hotfood)
-    RelativeLayout hotfood;
+    @Bind(R.id.viewPaperIndicator)
+    ViewPaperIndicator viewPaperIndicator;
     @Bind(R.id.content)
-    FrameLayout content;
-    @Bind(R.id.bashLinearLayout)
-    LinearLayout bashLinearLayout;
+    ViewPager content;
+    @Bind(R.id.back)
+    ImageView back;
 
     private FragmentManager mFragmentManager;
     private FragmentTransaction mFragmentTransaction;
-    private String[] titles = {"家常菜谱", "中华菜系", "各地小吃", "外国菜谱", "烘焙", "我的收藏"};
-    private int[]    lms={13,2,3,10,369};
-    private int mPosite;
-    private FoodTypeFragment mNewFoodFragment;
-    private FoodTypeFragment mHotFoodFragment;
+    private String[] titles = {"家常菜谱", "中华菜系", "各地小吃", "外国菜谱", "烘焙"};
+    private int[] lms = {13, 2, 3, 10, 369};
 
-    private final String UPDATE="update";
-    private final String RENQI="renqi";
+    private List<FoodTypeFragment> mFragmentList;
 
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.foodtype_acitivity_main);
-        mPosite=getIntent().getIntExtra("position",13);
+        mFragmentList = new ArrayList<>();
         ButterKnife.bind(this);
-        init();
-    }
-
-    public void init(){
-        title.setText(titles[mPosite]);
-        mFragmentManager = getSupportFragmentManager();
-        mFragmentTransaction = mFragmentManager.beginTransaction();
-        mNewFoodFragment=new FoodTypeFragment(UPDATE,lms[mPosite],1);
-        mFragmentTransaction.add(R.id.content, mNewFoodFragment);
-        mFragmentTransaction.commit();
-    }
-
-    @OnClick({R.id.back, R.id.newfood, R.id.hotfood})
-    public void onClick(View view) {
-        FragmentTransaction fragmenttransaction = mFragmentManager
-                .beginTransaction();
-        hideFragments(fragmenttransaction);
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.newfood:
-                clearView();
-                newfood.setBackgroundResource(R.drawable.btn_gray_big_pressed);
-                newfoodTv.setTextColor(Color.parseColor("#ffffff"));
-                if (mNewFoodFragment != null) {
-                    fragmenttransaction.show(mNewFoodFragment);
-                }
-                break;
-            case R.id.hotfood:
-                clearView();
-                hotfood.setBackgroundResource(R.drawable.btn_gray_big_pressed);
-                if (mHotFoodFragment != null) {
-                    fragmenttransaction.show(mHotFoodFragment);
-                } else {
-                    mHotFoodFragment = new FoodTypeFragment(RENQI,lms[mPosite],1);
-                    fragmenttransaction.add(R.id.content, mHotFoodFragment);
-                }
-                hotfoodTv.setTextColor(Color.parseColor("#ffffff"));
-                break;
+        for (int i = 0; i < 5; i++) {
+            mFragmentList.add(new FoodTypeFragment("update", lms[i], 1));
         }
-        fragmenttransaction.commit();
+        content.setAdapter(new FoodViewPaperAdapter(getSupportFragmentManager(), mFragmentList));
+        viewPaperIndicator.setmViewPager(content);
+        viewPaperIndicator.setmTitles(titles);
     }
 
-    private void clearView() {
-        newfood.setBackgroundResource(R.drawable.btn_gray_big_normal);
-        newfoodTv.setTextColor(Color.parseColor("#82858b"));
-        hotfood.setBackgroundResource(R.drawable.btn_gray_big_normal);
-        hotfoodTv.setTextColor(Color.parseColor("#82858b"));
+    @OnClick(R.id.back)
+    public void onClick() {
+        finish();
     }
 
-    private void hideFragments(
-            android.support.v4.app.FragmentTransaction fragment) {
-        if (mNewFoodFragment != null) {
-            fragment.hide(mNewFoodFragment);
+
+    public class FoodViewPaperAdapter extends FragmentPagerAdapter {
+        List<FoodTypeFragment> list;
+
+        public FoodViewPaperAdapter(FragmentManager fm, List<FoodTypeFragment> list) {
+            super(fm);
+            this.list = list;
         }
-        if (mHotFoodFragment != null) {
-            fragment.hide(mHotFoodFragment);
+
+        @Override
+        public Fragment getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return list.size();
         }
     }
 }

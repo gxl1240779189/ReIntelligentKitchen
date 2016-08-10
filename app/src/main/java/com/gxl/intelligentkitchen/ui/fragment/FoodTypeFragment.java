@@ -7,14 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.gxl.intelligentkitchen.R;
+import com.gxl.intelligentkitchen.entity.DynamicItem;
 import com.gxl.intelligentkitchen.entity.FoodGeneralItem;
 import com.gxl.intelligentkitchen.presenter.FoodTypeFragmentPresenter;
 import com.gxl.intelligentkitchen.ui.activity.FoodTeachActivity;
 import com.gxl.intelligentkitchen.ui.adapter.FoodGeneralAdapter;
 import com.gxl.intelligentkitchen.ui.customview.SlideShowView;
 import com.gxl.intelligentkitchen.ui.view.IFoodFragment;
+import com.gxl.intelligentkitchen.utils.NetUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +30,17 @@ import me.maxwin.view.XListView;
 /**
  * 作者：GXL on 2016/8/3 0003
  * 博客: http://blog.csdn.net/u014316462
- * 作用：
+ * 作用：不同种类的食品展示fragment
  */
 public class FoodTypeFragment extends Fragment implements
         XListView.IXListViewListener, IFoodFragment {
 
     @Bind(R.id.xListView)
     XListView xListView;
+    @Bind(R.id.loading)
+    RelativeLayout loading;
+    @Bind(R.id.tip)
+    LinearLayout tip;
 
     public FoodTypeFragment(String mSortBy, int mLM, int mPage) {
         this.mSortBy = mSortBy;
@@ -57,9 +65,9 @@ public class FoodTypeFragment extends Fragment implements
         return view;
     }
 
-    public void init(){
+    public void init() {
         mFoodGeneralList = new ArrayList<>();
-        mAdapter = new FoodGeneralAdapter(getActivity(), mFoodGeneralList);
+        mAdapter = new FoodGeneralAdapter(getActivity(), R.layout.generalother_listview_item, mFoodGeneralList);
         xListView.setAdapter(mAdapter);
         xListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -67,15 +75,22 @@ public class FoodTypeFragment extends Fragment implements
                 List<FoodGeneralItem> mDatas = mAdapter.returnmDatas();
                 FoodGeneralItem fooditem = mDatas.get(position - 1);
                 Intent intent = new Intent(getActivity(), FoodTeachActivity.class);
-                intent.putExtra("URLLINK",fooditem.getLink());
+                intent.putExtra("URLLINK", fooditem.getLink());
                 startActivity(intent);
             }
         });
         xListView.setPullLoadEnable(true);
         xListView.setXListViewListener(this);
         mFoodTypeFragmentPresenter = new FoodTypeFragmentPresenter(this);
-        mFoodTypeFragmentPresenter.onRefresh(mSortBy, mLM, mPage);
-        page=mPage;
+        if(NetUtil.checkNet(getActivity())){
+            loading.setVisibility(View.VISIBLE);
+            mFoodTypeFragmentPresenter.onRefresh(mSortBy, mLM, mPage);
+        }else{
+            loading.setVisibility(View.GONE);
+            tip.setVisibility(View.VISIBLE);
+        }
+
+        page = mPage;
     }
 
     @Override
@@ -86,7 +101,7 @@ public class FoodTypeFragment extends Fragment implements
     @Override
     public void onLoadMore() {
         page++;
-        mFoodTypeFragmentPresenter.onLoadMore(mSortBy,mLM,page);
+        mFoodTypeFragmentPresenter.onLoadMore(mSortBy, mLM, page);
     }
 
     @Override
@@ -98,6 +113,9 @@ public class FoodTypeFragment extends Fragment implements
 
     @Override
     public void onRefresh(List<FoodGeneralItem> list) {
+        loading.setVisibility(View.GONE);
+        tip.setVisibility(View.GONE);
+        xListView.setVisibility(View.VISIBLE);
         mAdapter.setDatas(list);
         mAdapter.notifyDataSetChanged();
         xListView.stopRefresh();
@@ -105,6 +123,11 @@ public class FoodTypeFragment extends Fragment implements
 
     @Override
     public void onInitSliderShow(List<SlideShowView.SliderShowViewItem> list) {
+    }
+
+    @Override
+    public void onInitDynamic(DynamicItem item) {
+
     }
 
     @Override

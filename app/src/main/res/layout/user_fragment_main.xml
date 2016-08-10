@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/normal_space"
+                android:text="个人中心"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:padding="@dimen/normal_space">
+
+            <com.gxl.intelligentkitchen.ui.customview.RoundImageView
+                android:id="@+id/UserPhoto"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:contentDescription="@null"
+                android:scaleType="centerInside"
+                android:src="@drawable/portrait_def" />
+
+            <TextView
+                android:id="@+id/loginText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/UserPhoto"
+                android:drawableRight="@drawable/arrow_normal"
+                android:paddingLeft="@dimen/little_space"
+                android:text="点击登录"
+                android:textSize="16dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="@dimen/normal_space">
+
+            <TextView
+                android:id="@+id/sendFood"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/sendfood"
+                android:gravity="center"
+                android:text="发表菜谱" />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/normal_bg_color" />
+
+            <TextView
+                android:id="@+id/sendDynamic"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/senddynamic"
+                android:gravity="center"
+                android:text="发表动态" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="4dp"
+            android:id="@+id/love"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/wd_mycollect"
+            android:drawablePadding="@dimen/normal_space"
+            android:drawableRight="@drawable/arrow_normal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/normal_space"
+            android:text="我的收藏"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/wd_publish"
+            android:drawablePadding="@dimen/normal_space"
+            android:drawableRight="@drawable/arrow_normal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/normal_space"
+            android:text="我的发布"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/wd_settings"
+            android:drawablePadding="@dimen/normal_space"
+            android:drawableRight="@drawable/arrow_normal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/normal_space"
+            android:text="检查更新"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/guanyu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/wd_lxb"
+            android:drawablePadding="@dimen/normal_space"
+            android:drawableRight="@drawable/arrow_normal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/normal_space"
+            android:text="关于"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+</ScrollView>

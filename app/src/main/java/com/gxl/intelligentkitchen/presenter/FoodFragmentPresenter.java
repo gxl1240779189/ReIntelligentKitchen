@@ -3,7 +3,9 @@ package com.gxl.intelligentkitchen.presenter;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.gxl.intelligentkitchen.entity.DynamicItem;
 import com.gxl.intelligentkitchen.entity.FoodGeneralItem;
+import com.gxl.intelligentkitchen.model.DynamicModel;
 import com.gxl.intelligentkitchen.model.FoodModel;
 import com.gxl.intelligentkitchen.model.impl.FoodModelImpl;
 import com.gxl.intelligentkitchen.ui.customview.SlideShowView;
@@ -20,6 +22,7 @@ import java.util.List;
 public class FoodFragmentPresenter {
     private IFoodFragment mIFoodFragment;
     private FoodModel mFoodModel=new FoodModel();
+    private DynamicModel mDynamicModel=new DynamicModel();
 
     public FoodFragmentPresenter(IFoodFragment mIFoodFragment) {
         this.mIFoodFragment = mIFoodFragment;
@@ -61,6 +64,18 @@ public class FoodFragmentPresenter {
 
             @Override
             public void getFailure() {
+            }
+        });
+
+        mDynamicModel.getDynamicItem(new FoodModelImpl.BaseListener() {
+            @Override
+            public void getSuccess(Object o) {
+                mIFoodFragment.onInitDynamic((DynamicItem) o);
+            }
+
+            @Override
+            public void getFailure() {
+
             }
         });
     }

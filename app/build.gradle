@@ -8,8 +8,8 @@ android {
         applicationId "com.gxl.intelligentkitchen"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "2.1"
     }
     buildTypes {
         release {
@@ -39,4 +39,11 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
     compile 'com.squareup.retrofit2:converter-scalars:2.0.0'
     compile 'com.android.support:support-v4:23.4.0'
+    compile files('libs/Bmob_Push_V0.9beta_20160520.jar')
+    compile files('libs/BmobSDK_V3.4.7_0518.jar')
+    compile files('libs/filechoose.jar')
+    compile files('libs/org.apache.http.legacy.jar')
+    compile 'me.iwf.photopicker:PhotoPicker:0.1.8'
+    compile files('libs/eventbus-2.4.0.jar')
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
 }

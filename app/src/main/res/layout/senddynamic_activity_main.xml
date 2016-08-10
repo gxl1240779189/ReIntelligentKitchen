@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingBottom="30dp"
+        android:orientation="vertical">
+
+        <include layout="@layout/senddynamic_activity_head"></include>
+        <EditText
+            android:padding="4dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/edit_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="70dp"
+            android:background="@android:color/white"
+            android:enabled="true"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:minLines="3"
+            android:hint="请输入文字..."
+            android:scrollbars="vertical"
+            android:textColor="@android:color/black"
+            android:textSize="14dp" />
+
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:cacheColorHint="#00000000"
+            android:columnWidth="100dp"
+            android:fadingEdge="none"
+            android:horizontalSpacing="2dp"
+            android:listSelector="#00000000"
+            android:numColumns="auto_fit"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:transcriptMode="alwaysScroll"
+            android:verticalSpacing="2dp" />
+    </LinearLayout>
+
+</LinearLayout>
