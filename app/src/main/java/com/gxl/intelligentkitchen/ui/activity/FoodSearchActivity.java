@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -64,6 +65,28 @@ public class FoodSearchActivity extends Activity {
         if (history_arr.size() > 0) {
             mAdapter = new SearchHistoryAdapter(this, R.layout.searchhistory_listview_item, history_arr);
             searchHistoryLv.setAdapter(mAdapter);
+            searchHistoryLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    new FoodSearchModel().onSearchFood(mAdapter.getItem(position), new FoodModelImpl.BaseListener() {
+                        @Override
+                        public void getSuccess(Object o) {
+                            mHelper.save(searchText.getText().toString());
+                            FoodSearchJson item = (FoodSearchJson) o;
+                            Intent intent = new Intent(FoodSearchActivity.this, FoodSearchResultActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable(SEARCHRESULT, item);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void getFailure() {
+
+                        }
+                    });
+                }
+            });
         } else {
             searchHistoryLv.setVisibility(View.GONE);
             clearHistoryBtn.setVisibility(View.GONE);

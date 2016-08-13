@@ -80,7 +80,7 @@ public class DynamicDetailActivity extends Activity {
         });
         writeDate.setText(dynamicItem.getCreatedAt());
         dynamicText.setText(dynamicItem.getText());
-        dynamicPhoto.setAdapter(new DynamicPhotoAdapter(DynamicDetailActivity.this,R.layout.dynamicdetail_listview_item,dynamicItem.getPhotoList()));
+        dynamicPhoto.setAdapter(new DynamicPhotoAdapter(DynamicDetailActivity.this, R.layout.dynamicdetail_listview_item, dynamicItem.getPhotoList()));
     }
 
     @OnClick(R.id.back)

@@ -23,6 +23,7 @@ public class WelcomeActivity extends Activity{
             @Override
             public void run() {
                 startActivity(new Intent(WelcomeActivity.this,HomeActivity.class));
+                finish();
             }
         }, 2000);
     }
