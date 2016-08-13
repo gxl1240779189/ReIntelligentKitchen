@@ -1,5 +1,6 @@
 package com.gxl.intelligentkitchen.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
@@ -10,7 +11,7 @@ import cn.bmob.v3.datatype.BmobFile;
  * 博客: http://blog.csdn.net/u014316462
  * 作用：动态圈Item
  */
-public class DynamicItem extends BmobObject {
+public class DynamicItem extends BmobObject implements Serializable{
 
     public User getWriter() {
         return Writer;

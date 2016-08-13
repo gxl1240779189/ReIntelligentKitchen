@@ -27,15 +27,19 @@ import com.gxl.intelligentkitchen.entity.User;
 import com.gxl.intelligentkitchen.model.UserModel;
 import com.gxl.intelligentkitchen.model.impl.FoodModelImpl;
 import com.gxl.intelligentkitchen.presenter.FoodFragmentPresenter;
+import com.gxl.intelligentkitchen.ui.activity.DynamicDetailActivity;
 import com.gxl.intelligentkitchen.ui.activity.FoodLoveActivity;
 import com.gxl.intelligentkitchen.ui.activity.FoodSearchActivity;
+import com.gxl.intelligentkitchen.ui.activity.FoodShowVideoActivity;
 import com.gxl.intelligentkitchen.ui.activity.FoodTeachActivity;
+import com.gxl.intelligentkitchen.ui.activity.FoodTeachVideoActivity;
 import com.gxl.intelligentkitchen.ui.activity.FoodTypeActivity;
 import com.gxl.intelligentkitchen.ui.adapter.FoodGeneralAdapter;
 import com.gxl.intelligentkitchen.ui.customview.RoundImageView;
 import com.gxl.intelligentkitchen.ui.customview.SlideShowView;
 import com.gxl.intelligentkitchen.ui.view.IFoodFragment;
 import com.gxl.intelligentkitchen.utils.NetUtil;
+import com.gxl.intelligentkitchen.utils.ToastUtils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -91,8 +95,10 @@ public class FoodFragment extends Fragment implements IFoodFragment, XListView.I
 
     private ImageLoader imageLoader = ImageLoader.getInstance();
     private DisplayImageOptions options;
-
     private final String FOODITEM = "fooditem";
+    private LinearLayout mDynamicLayout;
+
+    private DynamicItem mDynamicItem;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,6 +112,17 @@ public class FoodFragment extends Fragment implements IFoodFragment, XListView.I
         dynamicDetail = (TextView) mFoodFragmentHead.findViewById(R.id.dynamic_detail);
         dynamicPhoto = (ImageView) mFoodFragmentHead.findViewById(R.id.dynamic_photo);
         mSlideshowView = (SlideShowView) mFoodFragmentHead.findViewById(R.id.slideshowView);
+        mDynamicLayout = (LinearLayout) mFoodFragmentHead.findViewById(R.id.dynamic_head);
+        mDynamicLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DynamicDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("DYNAMIC", mDynamicItem);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         xListView.addHeaderView(mFoodFragmentHead);
         init();
         return v;
@@ -157,8 +174,10 @@ public class FoodFragment extends Fragment implements IFoodFragment, XListView.I
                             startActivity(intent);
                             break;
                         case 1:
+                            ToastUtils.showLong(getActivity(), "尚未开发，敬请期待");
                             break;
                         case 2:
+                            startActivity(new Intent(getActivity(), FoodShowVideoActivity.class));
                             break;
                         case 3:
                             startActivity(new Intent(getActivity(), FoodLoveActivity.class));
@@ -211,6 +230,7 @@ public class FoodFragment extends Fragment implements IFoodFragment, XListView.I
 
     @Override
     public void onInitDynamic(DynamicItem item) {
+        mDynamicItem = item;
         new UserModel().getUser(item.getWriter().getObjectId(), new FoodModelImpl.BaseListener() {
             @Override
             public void getSuccess(Object o) {
@@ -224,7 +244,11 @@ public class FoodFragment extends Fragment implements IFoodFragment, XListView.I
 
             }
         });
-        imageLoader.displayImage(item.getPhotoList().get(0).getUrl(), dynamicPhoto, options);
+        if (item.getPhotoList().size() != 0 && item.getPhotoList() != null) {
+            imageLoader.displayImage(item.getPhotoList().get(0).getUrl(), dynamicPhoto, options);
+        } else {
+            dynamicPhoto.setVisibility(View.GONE);
+        }
         dynamicText.setText(item.getText());
     }
 
@@ -248,7 +272,7 @@ public class FoodFragment extends Fragment implements IFoodFragment, XListView.I
         }
     }
 
-    @OnClick( R.id.search)
+    @OnClick(R.id.search)
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.search:

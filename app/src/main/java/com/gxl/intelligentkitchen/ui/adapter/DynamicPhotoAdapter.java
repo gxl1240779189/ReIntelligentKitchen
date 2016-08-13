@@ -1,40 +1,43 @@
 package com.gxl.intelligentkitchen.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+
 import com.gxl.intelligentkitchen.R;
-import com.gxl.intelligentkitchen.entity.DynamicItem;
-import com.gxl.intelligentkitchen.entity.DynamicPhotoItem;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * 作者：GXL on 2016/8/3 0003
  * 博客: http://blog.csdn.net/u014316462
- * 作用：发朋友圈gridview的adpter
+ * 作用：朋友圈的adapter
  */
 public class DynamicPhotoAdapter extends BaseAdapter {
-    private List<DynamicPhotoItem> albumBeanList;
-    private Context mContext;
-    private com.nostra13.universalimageloader.core.ImageLoader imageLoader = com.nostra13.universalimageloader.core.ImageLoader.getInstance();
+
+    private LayoutInflater mInflater;
+    private List<BmobFile> mDatas;
+
+    private int mLayoutRes;
+    private ImageLoader imageLoader = ImageLoader.getInstance();
     private DisplayImageOptions options;
 
-    public DynamicPhotoAdapter(Context mContext) {
-        albumBeanList = new ArrayList<>();
-        albumBeanList.add(new DynamicPhotoItem("", true));
-        this.mContext = mContext;
-        imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
+    public DynamicPhotoAdapter(Context context,int LayoutId, List<BmobFile> datas) {
+        this.mLayoutRes=LayoutId;
+        this.mDatas = datas;
+        mInflater = LayoutInflater.from(context);
+        imageLoader.init(ImageLoaderConfiguration.createDefault(context));
         options = new DisplayImageOptions.Builder()
                 .showStubImage(R.drawable.xiaolian)
                 .showImageForEmptyUri(R.drawable.xiaolian)
@@ -45,12 +48,12 @@ public class DynamicPhotoAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return albumBeanList.size();
+        return mDatas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return albumBeanList.get(position);
+        return mDatas.get(position);
     }
 
     @Override
@@ -59,61 +62,22 @@ public class DynamicPhotoAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        final DynamicPhotoItem albumBean = albumBeanList.get(position);
-        ViewHolder viewHolder = null;
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
         if (convertView == null) {
-            viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.dynamic_gridview_item, null);
-            viewHolder.imageView = (ImageView) convertView.findViewById(R.id.image);
-            convertView.setTag(viewHolder);
+            convertView = mInflater.inflate(mLayoutRes, null);
+            holder = new ViewHolder();
+            holder.imageView = (ImageView) convertView.findViewById(R.id.image);
+            convertView.setTag(holder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
-        if (albumBean.isPick()) {
-            viewHolder.imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.add_photo));
-        } else {
-            imageLoader.displayImage("file:///" + albumBean.getFilePath(), viewHolder.imageView, options);
-        }
+        BmobFile bmobFile = mDatas.get(position);
+        imageLoader.displayImage(bmobFile.getUrl(), holder.imageView, options);
         return convertView;
     }
 
-    public void addData(List<DynamicPhotoItem> mAlbumBeanList) {
-        albumBeanList.remove(albumBeanList.size() - 1);
-        albumBeanList.addAll(mAlbumBeanList);
-        albumBeanList.add(new DynamicPhotoItem("", true));
-        notifyDataSetChanged();
-    }
-
-    public void removeData(int position) {
-        removeData(albumBeanList.get(position));
-    }
-
-    public void removeData(DynamicPhotoItem albumBean) {
-        if (albumBeanList != null && albumBeanList.contains(albumBean)) {
-            //判断当前的数量
-            switch (albumBeanList.size()) {
-                case 1:
-                case 2:
-                case 3:
-                    albumBeanList.remove(albumBean);
-                    break;
-                case 4:
-                    albumBeanList.remove(albumBean);
-                    if (!albumBeanList.get(albumBeanList.size() - 1).isPick()) {
-                        albumBeanList.add(new DynamicPhotoItem("", true));
-                    }
-                    break;
-            }
-            this.notifyDataSetInvalidated();
-        }
-    }
-
-    public List<DynamicPhotoItem> getData() {
-        return albumBeanList;
-    }
-
-    private static class ViewHolder {
+    private final class ViewHolder {
         public ImageView imageView;
     }
 }

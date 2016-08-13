@@ -1,17 +1,16 @@
 package com.gxl.intelligentkitchen.ui.activity;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gxl.intelligentkitchen.R;
@@ -19,12 +18,10 @@ import com.gxl.intelligentkitchen.entity.DynamicItem;
 import com.gxl.intelligentkitchen.entity.DynamicPhotoItem;
 import com.gxl.intelligentkitchen.entity.User;
 import com.gxl.intelligentkitchen.model.DynamicModel;
-import com.gxl.intelligentkitchen.ui.adapter.DynamicPhotoAdapter;
-import com.gxl.intelligentkitchen.utils.SPUtils;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.gxl.intelligentkitchen.model.UserModel;
+import com.gxl.intelligentkitchen.model.impl.FoodModelImpl;
+import com.gxl.intelligentkitchen.ui.adapter.DynamicPhotoChooseAdapter;
+import com.gxl.intelligentkitchen.ui.dialog.DialogBuilder;
 
 
 import java.io.File;
@@ -41,7 +38,7 @@ import me.iwf.photopicker.utils.PhotoPickerIntent;
 /**
  * 作者：GXL on 2016/8/3 0003
  * 博客: http://blog.csdn.net/u014316462
- * 作用：
+ * 作用：发朋友圈页面
  */
 public class SendDynamicActivity extends Activity {
     private final int REQUEST_CODE = 0x01;
@@ -53,16 +50,18 @@ public class SendDynamicActivity extends Activity {
     EditText editContent;
     @Bind(R.id.gridView)
     GridView gridView;
-    private DynamicPhotoAdapter mDynamicPhotoAdapter;
+    private DynamicPhotoChooseAdapter mDynamicPhotoChooseAdapter;
     private final String LOGINUSER = "loginuser";
     private User mUser;
+    private Dialog mLoadingDialog;
+    private Dialog mLoadingFinishDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.senddynamic_activity_main);
-        mUser= (User) getIntent().getSerializableExtra("User");
+        mUser = (User) getIntent().getSerializableExtra("User");
         ButterKnife.bind(this);
         init();
     }
@@ -71,16 +70,18 @@ public class SendDynamicActivity extends Activity {
         final PhotoPickerIntent intent = new PhotoPickerIntent(SendDynamicActivity.this);
         intent.setPhotoCount(6);
         intent.setShowCamera(true);
-        mDynamicPhotoAdapter = new DynamicPhotoAdapter(SendDynamicActivity.this);
-        gridView.setAdapter(mDynamicPhotoAdapter);
+        mDynamicPhotoChooseAdapter = new DynamicPhotoChooseAdapter(SendDynamicActivity.this);
+        gridView.setAdapter(mDynamicPhotoChooseAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == mDynamicPhotoAdapter.getCount() - 1) {
+                if (position == mDynamicPhotoChooseAdapter.getCount() - 1) {
                     startActivityForResult(intent, REQUEST_CODE);
                 }
             }
         });
+        mLoadingDialog = DialogBuilder.createLoadingDialog(SendDynamicActivity.this, "正在上传");
+        mLoadingFinishDialog = DialogBuilder.createLoadingfinishDialog(SendDynamicActivity.this, "上传完成");
     }
 
     @Override
@@ -96,7 +97,7 @@ public class SendDynamicActivity extends Activity {
                     list.add(new DynamicPhotoItem(path, false));
                 }
             }
-            mDynamicPhotoAdapter.addData(list);
+            mDynamicPhotoChooseAdapter.addData(list);
         }
     }
 
@@ -107,17 +108,34 @@ public class SendDynamicActivity extends Activity {
                 finish();
                 break;
             case R.id.send:
+                mLoadingDialog.show();
                 DynamicItem dynamicItem = new DynamicItem();
                 dynamicItem.setWriter(mUser);
-                Log.i("TAG", "onClick: "+(mUser).getName());
                 List<BmobFile> fileList = new ArrayList<>();
-                ArrayList<DynamicPhotoItem> photoItems = (ArrayList<DynamicPhotoItem>) mDynamicPhotoAdapter.getData();
-                for(int i=0;i<photoItems.size()-1;i++){
+                ArrayList<DynamicPhotoItem> photoItems = (ArrayList<DynamicPhotoItem>) mDynamicPhotoChooseAdapter.getData();
+                for (int i = 0; i < photoItems.size() - 1; i++) {
                     fileList.add(new BmobFile(new File(photoItems.get(i).getFilePath())));
                 }
                 dynamicItem.setText(editContent.getText().toString());
                 dynamicItem.setPhotoList(fileList);
-                new DynamicModel().sendDynamicItem(dynamicItem);
+                new DynamicModel().sendDynamicItem(dynamicItem, new FoodModelImpl.BaseListener() {
+                    @Override
+                    public void getSuccess(Object o) {
+                        mLoadingDialog.dismiss();
+                        mLoadingFinishDialog.show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mLoadingFinishDialog.dismiss();
+                                finish();
+                            }
+                        }, 500);
+                    }
+                    @Override
+                    public void getFailure() {
+
+                    }
+                });
                 break;
         }
     }

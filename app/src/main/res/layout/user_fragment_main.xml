@@ -38,7 +38,7 @@
                 android:layout_height="60dp"
                 android:contentDescription="@null"
                 android:scaleType="centerInside"
-                android:src="@drawable/portrait_def" />
+                android:src="@drawable/ic_empty_dish" />
 
             <TextView
                 android:id="@+id/loginText"

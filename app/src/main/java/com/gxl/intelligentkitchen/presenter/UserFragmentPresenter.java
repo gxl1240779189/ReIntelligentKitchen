@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.gxl.intelligentkitchen.entity.User;
+import com.gxl.intelligentkitchen.entity.UserLocal;
 import com.gxl.intelligentkitchen.model.UserModel;
 import com.gxl.intelligentkitchen.ui.activity.LoginActivity;
 import com.gxl.intelligentkitchen.ui.activity.SendDynamicActivity;

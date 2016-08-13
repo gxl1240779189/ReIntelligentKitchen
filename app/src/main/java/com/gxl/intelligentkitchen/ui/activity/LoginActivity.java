@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.gxl.intelligentkitchen.R;
 import com.gxl.intelligentkitchen.entity.User;
+import com.gxl.intelligentkitchen.entity.UserLocal;
 import com.gxl.intelligentkitchen.eventbus.UserEventBus;
 import com.gxl.intelligentkitchen.model.UserModel;
 import com.gxl.intelligentkitchen.model.impl.FoodModelImpl;
@@ -59,7 +60,7 @@ public class LoginActivity extends Activity {
                 finish();
                 break;
             case R.id.login_register:
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, PhoneValidateActivity.class));
                 break;
             case R.id.login_btn:
                 if (!TextUtils.isEmpty(loginUname.getText().toString()) && !TextUtils.isEmpty(loginPass.getText().toString())) {
@@ -68,7 +69,15 @@ public class LoginActivity extends Activity {
                         public void getSuccess(Object o) {
                             ToastUtils.showLong(LoginActivity.this, "登录成功");
                             User user = (User) o;
-                            EventBus.getDefault().post(new UserEventBus(user));
+                            UserLocal userLocal = new UserLocal();
+                            userLocal.setName(user.getName());
+                            userLocal.setObjectId(user.getObjectId());
+                            userLocal.setNumber(user.getNumber());
+                            if (user.getPhoto() != null) {
+                                userLocal.setPhoto(user.getPhoto().getUrl());
+                            }
+                            mUserModel.putUserLocal(userLocal);
+                            EventBus.getDefault().post(new UserEventBus(userLocal));
                             finish();
                         }
 

@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gxl.intelligentkitchen.R;
+import com.gxl.intelligentkitchen.ui.fragment.DynamicFragment;
 import com.gxl.intelligentkitchen.ui.fragment.FoodFragment;
 
 import com.gxl.intelligentkitchen.ui.fragment.UserFragment;
@@ -63,6 +64,7 @@ public class HomeActivity extends FragmentActivity {
 
     private FoodFragment mFoodFragment;
     private UserFragment mUserFragment;
+    private DynamicFragment mDynamicFragment;
 
 
     private com.nostra13.universalimageloader.core.ImageLoader imageLoader = com.nostra13.universalimageloader.core.ImageLoader.getInstance();
@@ -112,7 +114,12 @@ public class HomeActivity extends FragmentActivity {
                 clearView();
                 controlIv.setImageResource(R.drawable.main_home_red);
                 controlTv.setTextColor(Color.parseColor("#FD7575"));
-                startActivity(new Intent(HomeActivity.this, SendDynamicActivity.class));
+                if (mDynamicFragment != null) {
+                    fragmenttransaction.show(mDynamicFragment);
+                } else {
+                    mDynamicFragment = new DynamicFragment();
+                    fragmenttransaction.add(R.id.content, mDynamicFragment);
+                }
                 break;
             case R.id.personPage:
                 clearView();
@@ -146,6 +153,9 @@ public class HomeActivity extends FragmentActivity {
         }
         if (mUserFragment != null) {
             fragment.hide(mUserFragment);
+        }
+        if (mDynamicFragment != null) {
+            fragment.hide(mDynamicFragment);
         }
     }
 

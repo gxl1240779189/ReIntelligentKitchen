@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -15,19 +14,17 @@ import android.widget.ProgressBar;
 
 import com.gxl.intelligentkitchen.R;
 import com.gxl.intelligentkitchen.entity.FoodSearchJson;
-import com.gxl.intelligentkitchen.https.service.FoodSearchService;
+import com.gxl.intelligentkitchen.helper.SharedpreferencesHelper;
 import com.gxl.intelligentkitchen.model.FoodSearchModel;
 import com.gxl.intelligentkitchen.model.impl.FoodModelImpl;
-import com.gxl.intelligentkitchen.utils.StringUtils;
+import com.gxl.intelligentkitchen.ui.adapter.SearchHistoryAdapter;
 import com.gxl.intelligentkitchen.utils.ToastUtils;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * 作者：GXL on 2016/8/3 0003
@@ -47,8 +44,10 @@ public class FoodSearchActivity extends Activity {
     Button clearHistoryBtn;
     @Bind(R.id.search_zhuangtai)
     ProgressBar searchZhuangtai;
+    private SearchHistoryAdapter mAdapter;
 
-    private final String SEARCHRESULT="searchresult";
+    private final String SEARCHRESULT = "searchresult";
+    private SharedpreferencesHelper mHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +55,19 @@ public class FoodSearchActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.foodsearch_activity_main);
         ButterKnife.bind(this);
+        init();
     }
 
     public void init() {
+        mHelper = new SharedpreferencesHelper(FoodSearchActivity.this);
+        List<String> history_arr = mHelper.returnhistroydata();
+        if (history_arr.size() > 0) {
+            mAdapter = new SearchHistoryAdapter(this, R.layout.searchhistory_listview_item, history_arr);
+            searchHistoryLv.setAdapter(mAdapter);
+        } else {
+            searchHistoryLv.setVisibility(View.GONE);
+            clearHistoryBtn.setVisibility(View.GONE);
+        }
     }
 
     @OnClick({R.id.search_back, R.id.search_button, R.id.clear_history_btn})
@@ -69,9 +78,10 @@ public class FoodSearchActivity extends Activity {
                 break;
             case R.id.search_button:
                 if (!TextUtils.isEmpty(searchText.getText().toString())) {
-                    new FoodSearchModel().onSearchFood("韭菜炒蛋", new FoodModelImpl.BaseListener() {
+                    new FoodSearchModel().onSearchFood(searchText.getText().toString(), new FoodModelImpl.BaseListener() {
                         @Override
                         public void getSuccess(Object o) {
+                            mHelper.save(searchText.getText().toString());
                             FoodSearchJson item = (FoodSearchJson) o;
                             Intent intent = new Intent(FoodSearchActivity.this, FoodSearchResultActivity.class);
                             Bundle bundle = new Bundle();
@@ -90,6 +100,10 @@ public class FoodSearchActivity extends Activity {
                 }
                 break;
             case R.id.clear_history_btn:
+                mHelper.cleanHistory();
+                mAdapter.clear();
+                mAdapter.notifyDataSetChanged();
+                searchHistoryLv.setVisibility(View.GONE);
                 break;
         }
     }

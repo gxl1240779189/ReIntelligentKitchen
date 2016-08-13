@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/register_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/register_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@null"
+                android:padding="@dimen/normal_space"
+                android:src="@drawable/ic_back_u" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/normal_space"
+                android:text="手机验证"
+                android:textSize="@dimen/title_text_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="@dimen/normal_space"
+            android:background="@color/normal_orange_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normal_input_height"
+            android:background="@drawable/mini_block_item_normal"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/register_phone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/normal_space"
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawableLeft="@drawable/my_register_phone"
+                android:drawablePadding="@dimen/normal_space"
+                android:hint="@string/register_phone_default"
+                android:inputType="phone"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/register_get_check_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/my_register_get_check_pass"
+                android:text="@string/register_get_check_num"
+                android:textColor="@color/gray" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/register_checknum"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normal_input_height"
+            android:layout_marginLeft="@dimen/normal_space"
+            android:background="@drawable/mini_block_item_normal"
+            android:drawableLeft="@drawable/my_register_check_pass"
+            android:drawablePadding="@dimen/normal_space"
+            android:hint="@string/register_check_num_default"
+            android:inputType="text"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_layout"
+        android:layout_margin="@dimen/normal_space"
+        android:background="@drawable/my_btn_bg_color"
+        android:padding="@dimen/little_space"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_defalut" />
+
+</RelativeLayout>

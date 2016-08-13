@@ -32,7 +32,9 @@
         android:verticalSpacing="0.0dip" >
     </GridView>
 
-    <include layout="@layout/dynamic_listview_item"></include>
+    <include
+        android:id="@+id/dynamic_head"
+        layout="@layout/dynamic_listview_item"></include>
 
 
 </LinearLayout>

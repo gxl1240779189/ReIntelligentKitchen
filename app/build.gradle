@@ -8,14 +8,20 @@ android {
         applicationId "com.gxl.intelligentkitchen"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 3
-        versionName "2.1"
+        versionCode 4
+        versionName "2.2"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+}
+
+repositories{
+    flatDir{
+        dirs 'libs' //就是你放aar的目录地址
     }
 }
 
@@ -27,7 +33,9 @@ dependencies {
     compile files('libs/xUtils-2.6.14.jar')
     compile project(':xListView')
     //编译RxJava
+
     //编译RxAndroid
+
     //编译Retrofit及其相关库，包括Gson
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'io.reactivex:rxjava:1.0.14'
@@ -46,4 +54,9 @@ dependencies {
     compile 'me.iwf.photopicker:PhotoPicker:0.1.8'
     compile files('libs/eventbus-2.4.0.jar')
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+    compile files('libs/MobCommons-2016.0714.1402.jar')
+    compile files('libs/MobTools-2016.0714.1402.jar')
+    compile name: 'SMSSDK-2.1.1', ext: 'aar'
+    compile name: 'SMSSDKGUI-2.1.1', ext: 'aar'
+    compile project(':vitamio')
 }

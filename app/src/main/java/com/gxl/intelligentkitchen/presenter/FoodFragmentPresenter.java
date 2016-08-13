@@ -21,8 +21,8 @@ import java.util.List;
  */
 public class FoodFragmentPresenter {
     private IFoodFragment mIFoodFragment;
-    private FoodModel mFoodModel=new FoodModel();
-    private DynamicModel mDynamicModel=new DynamicModel();
+    private FoodModel mFoodModel = new FoodModel();
+    private DynamicModel mDynamicModel = new DynamicModel();
 
     public FoodFragmentPresenter(IFoodFragment mIFoodFragment) {
         this.mIFoodFragment = mIFoodFragment;
@@ -30,15 +30,16 @@ public class FoodFragmentPresenter {
 
     /**
      * 上拉加载更多
+     *
      * @param sortby
      * @param lm
      * @param page
      */
-    public void onLoadMore(String sortby,int lm,int page){
+    public void onLoadMore(String sortby, int lm, int page) {
         mFoodModel.getGeneralFoodsItem(sortby, lm, page, new FoodModelImpl.BaseListener() {
             @Override
             public void getSuccess(Object o) {
-                List<FoodGeneralItem> list= (List<FoodGeneralItem>) o;
+                List<FoodGeneralItem> list = (List<FoodGeneralItem>) o;
                 mIFoodFragment.onLoadMore(list);
             }
 
@@ -50,15 +51,16 @@ public class FoodFragmentPresenter {
 
     /**
      * 下拉刷新
+     *
      * @param sortby
      * @param lm
      * @param page
      */
-    public void onRefresh(String sortby,int lm,int page){
+    public void onRefresh(String sortby, int lm, int page) {
         mFoodModel.getGeneralFoodsItem(sortby, lm, page, new FoodModelImpl.BaseListener() {
             @Override
             public void getSuccess(Object o) {
-                List<FoodGeneralItem> list= (List<FoodGeneralItem>) o;
+                List<FoodGeneralItem> list = (List<FoodGeneralItem>) o;
                 mIFoodFragment.onRefresh(list);
             }
 
@@ -70,7 +72,8 @@ public class FoodFragmentPresenter {
         mDynamicModel.getDynamicItem(new FoodModelImpl.BaseListener() {
             @Override
             public void getSuccess(Object o) {
-                mIFoodFragment.onInitDynamic((DynamicItem) o);
+                List<DynamicItem> list = (List<DynamicItem>) o;
+                mIFoodFragment.onInitDynamic(list.get(0));
             }
 
             @Override
@@ -83,14 +86,14 @@ public class FoodFragmentPresenter {
     /**
      * 初始化SliderShow
      */
-    public void onInitSliderShow(){
+    public void onInitSliderShow() {
         mFoodModel.getSliderShowFood(new FoodModelImpl.BaseListener() {
             @Override
             public void getSuccess(Object o) {
-                List<SlideShowView.SliderShowViewItem> list= (List<SlideShowView.SliderShowViewItem>) o;
-                for (SlideShowView.SliderShowViewItem item:list
+                List<SlideShowView.SliderShowViewItem> list = (List<SlideShowView.SliderShowViewItem>) o;
+                for (SlideShowView.SliderShowViewItem item : list
                         ) {
-                    Log.i("TAG", "onInitSliderShow: "+item.getFoodname());
+                    Log.i("TAG", "onInitSliderShow: " + item.getFoodname());
                 }
                 mIFoodFragment.onInitSliderShow(list);
             }

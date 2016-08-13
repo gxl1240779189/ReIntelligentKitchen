@@ -6,14 +6,14 @@
     android:gravity="center"
     android:orientation="vertical"
     android:focusable="false"
-    android:padding="10dp"
     >
 
     <ImageView
         android:focusable="false"
         android:id="@+id/image"
-        android:layout_width="95dp"
+        android:layout_width="match_parent"
         android:layout_height="95dp"
+        android:scaleType="fitXY"
         android:src="@drawable/add_photo" />
 
 </LinearLayout>
