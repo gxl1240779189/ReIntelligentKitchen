@@ -34,7 +34,9 @@
 
         <activity
             android:name=".ui.activity.HomeActivity"
-            android:configChanges="orientation"></activity>
+            android:configChanges="orientation"
+            android:launchMode="singleTask"
+            ></activity>
 
         <activity
             android:name=".ui.activity.FoodTypeActivity"
@@ -50,11 +52,15 @@
 
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:configChanges="orientation"></activity>
+            android:configChanges="orientation"
+            android:launchMode="singleTask"
+            ></activity>
 
         <activity
             android:name=".ui.activity.RegisterActivity"
-            android:configChanges="orientation"></activity>
+            android:configChanges="orientation"
+            android:launchMode="singleTask"
+            ></activity>
 
         <activity
             android:name=".ui.activity.FoodSearchActivity"
@@ -74,7 +80,9 @@
 
         <activity
             android:name=".ui.activity.PhoneValidateActivity"
-            android:configChanges="orientation"></activity>
+            android:configChanges="orientation"
+            android:launchMode="singleTask"
+            ></activity>
 
         <activity
             android:name=".ui.activity.MyDynamicActivity"

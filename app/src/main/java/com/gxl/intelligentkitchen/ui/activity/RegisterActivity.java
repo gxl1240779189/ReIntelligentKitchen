@@ -60,6 +60,7 @@ public class RegisterActivity extends Activity {
                         @Override
                         public void getSuccess(Object o) {
                             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            finish();
                         }
 
                         @Override
@@ -67,7 +68,6 @@ public class RegisterActivity extends Activity {
 
                         }
                     });
-                    finish();
                 } else {
                     ToastUtils.showLong(RegisterActivity.this, "请填写完整信息");
                 }

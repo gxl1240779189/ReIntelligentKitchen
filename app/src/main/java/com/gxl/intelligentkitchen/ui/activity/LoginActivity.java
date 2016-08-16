@@ -61,6 +61,7 @@ public class LoginActivity extends Activity {
                 break;
             case R.id.login_register:
                 startActivity(new Intent(LoginActivity.this, PhoneValidateActivity.class));
+                finish();
                 break;
             case R.id.login_btn:
                 if (!TextUtils.isEmpty(loginUname.getText().toString()) && !TextUtils.isEmpty(loginPass.getText().toString())) {
@@ -77,6 +78,7 @@ public class LoginActivity extends Activity {
                                 userLocal.setPhoto(user.getPhoto().getUrl());
                             }
                             mUserModel.putUserLocal(userLocal);
+                            startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                             EventBus.getDefault().post(new UserEventBus(userLocal));
                             finish();
                         }

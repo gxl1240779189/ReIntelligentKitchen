@@ -62,6 +62,7 @@ public class PhoneValidateActivity extends Activity {
                         Intent intent = new Intent(PhoneValidateActivity.this, RegisterActivity.class);
                         intent.putExtra("phone", registerPhone.getText().toString());
                         startActivity(intent);
+                        finish();
                     } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                     } else if (event == SMSSDK.RESULT_ERROR) {
                     }
