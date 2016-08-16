@@ -9,7 +9,7 @@
 
 1. 主界面通过滚动栏和listview的方式展示最火热的美食和最热的用户动态。
 
- ![image](https://github.com/gxl1240779189/ReIntelligentKitchen/blob/master/screenshot/github_foodshow_1.gif)
+![image](https://github.com/gxl1240779189/ReIntelligentKitchen/blob/master/screenshot/github_foodshow_1.gif)
 
 2. 用户还可以根据分类和关键字搜索美食。
  
