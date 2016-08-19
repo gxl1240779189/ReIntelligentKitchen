@@ -12,20 +12,18 @@
         -->
     </style>
 
-    
-     <!-- Application theme. -->
+
+    <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    
-     <style name="MyTheme" parent="AppBaseTheme">
-       <!-- <item name="vpiTabPageIndicatorStyle">@style/MyWidget.TabPageIndicator</item>-->
-       <!--  <item name="android:windowBackground">@drawable/init_pic</item> -->
-      <!--   <item name="android:windowNoTitle">true</item>  
-        <item name="android:animationDuration">5000</item>
-        <item name="android:windowContentOverlay">@null</item>  --> 
+
+    <style name="MyTheme" parent="android:Theme.Light">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
-    
+
     <style name="MyWidget.TabPageIndicator" parent="android:Widget">
         <item name="android:gravity">center</item>
         <item name="android:paddingLeft">22dip</item>
@@ -41,13 +39,14 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
-    
-    <style name="loading_dialog" parent="android:style/Theme.Dialog">  
-        <item name="android:windowFrame">@null</item>  
-        <item name="android:windowNoTitle">true</item>   
-        <item name="android:windowBackground">@drawable/loading_bg</item>  
-        <item name="android:windowIsFloating">true</item>  
-        <item name="android:windowContentOverlay">@null</item>  
-    </style>  
+
+    <style name="loading_dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/loading_bg</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
 
 </resources>
